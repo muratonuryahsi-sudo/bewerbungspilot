@@ -1,0 +1,13 @@
+# Persönliche Daten bleiben lokal und landen nie im Repo
+profil.md
+einstellungen.json
+bewerbungen.json
+bewerbungen.md
+uebersicht.html
+bewerbungen/
+recherche/
+unterlagen
+.upload/
+*.err
+.DS_Store
+__pycache__/

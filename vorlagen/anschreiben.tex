@@ -1,0 +1,31 @@
+% Platzhalter: <<LANG>>, <<NAME>>, <<ADRESSZEILE>>, <<KONTAKT>>, <<ORT>>, <<FIRMA>>, <<ADRESSE>>, <<DATUM>>, <<BETREFF>>, <<ANREDE>>, <<TEXT>>, <<GRUSS>>
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\usepackage[<<LANG>>]{babel}
+\setmainfont{texgyretermes}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+\usepackage[left=1in,right=1in,top=0.8in,bottom=0.8in]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{9pt}
+\raggedright
+\begin{document}
+\begin{center}
+  {\LARGE <<NAME>>}\\[3pt]
+  \small <<ADRESSZEILE>>\\
+  <<KONTAKT>>
+\end{center}
+\vspace{6pt}
+<<FIRMA>>\\
+<<ADRESSE>>
+
+\hfill <<ORT>>, <<DATUM>>
+
+\textbf{<<BETREFF>>}
+
+<<ANREDE>>
+
+<<TEXT>>
+
+<<GRUSS>>\\[4pt]
+<<NAME>>
+\end{document}

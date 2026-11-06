@@ -1,0 +1,16 @@
+{
+ "eingerichtet": false,
+ "name": "Vorname Nachname",
+ "strasse": "Musterstraße 1",
+ "plz_ort": "12345 Musterstadt",
+ "ort": "Musterstadt",
+ "telefon": "+49 170 0000000",
+ "email": "vorname.nachname@example.com",
+ "unterlagen_ordner": "~/Bewerbungsunterlagen",
+ "lebenslauf": "Lebenslauf.pdf",
+ "weitere_dokumente": ["Notenspiegel.pdf", "Immatrikulationsbescheinigung.pdf"],
+ "agent": "claude",
+ "agy": false,
+ "browser": true,
+ "gmail": false
+}
