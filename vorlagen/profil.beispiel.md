@@ -31,9 +31,12 @@ Wird bei der Einrichtung zusammen mit dem Agenten ausgefüllt. Alles mit TODO is
 - TODO Firma, Ort, Rolle, von–bis
   - Was genau gemacht (ehrlich, konkret, keine Übertreibung)
   - Kurzsatz für Anschreiben: TODO
+  - Konkretes Ergebnis / Wirkung (nur echte Fakten und Zahlen, sonst leer lassen): TODO
+  - Lern-Beleg (Beispiel, wie du dich schnell in ein neues Tool eingearbeitet hast): TODO
 
 ## Projekte (Studium / privat)
 - TODO Projekt: Technologien, eigene Rolle
+  - Konkretes Ergebnis / Wirkung (nur echte Fakten und Zahlen): TODO
 
 ## Skills
 - Programmierung: TODO

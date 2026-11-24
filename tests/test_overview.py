@@ -3,6 +3,7 @@ import sys, pathlib, unittest, tempfile, shutil, subprocess, json
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
+@unittest.skipUnless(shutil.which("tectonic"), "tectonic fehlt")
 class Uebersicht(unittest.TestCase):
     def test_cv_pane_mit_und_ohne_cv_pdf(self):
         t = pathlib.Path(tempfile.mkdtemp())

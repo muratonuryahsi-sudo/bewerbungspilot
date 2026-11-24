@@ -16,7 +16,8 @@ Claude Code findet sie unter `.claude/skills/`, Codex unter `.agents/skills/` (b
 - `bewerbungen.json` – Tracker (einzige Quelle). Nur über `tools/track.py` ändern.
 - `uebersicht.html` / `bewerbungen.md` – automatisch erzeugt, nicht von Hand bearbeiten.
 - Status-Werte: in Prüfung, Gespräch, Zusage, Absage, keine Antwort, nicht abgeschlossen, unklar.
-- `bewerbungen/<datum>_<firma>_<stelle>/` – pro Bewerbung stellenanzeige.md, spec.json, Anschreiben (.tex + PDF), optional cv.tex + cv.pdf.
+- `bewerbungen/<datum>_<firma>_<stelle>/` – pro Bewerbung stellenanzeige.md, anschreiben_spec.json, Anschreiben (.tex + PDF), optional cv_spec.json, cv.tex + cv.pdf.
+- `docs/anschreiben_regeln.md` – Regeln fürs Anschreiben (Aufbau, Anti-KI, Prüfliste). Vor jedem Anschreiben lesen. `docs/anschreiben_protokoll.md` ist nur der Hintergrund (Recherche), nicht jedes Mal lesen.
 - `cv_daten.json` – deine Fakten mit Tags und Varianten für `tools/cv.py` (nur lokal).
 - `recherche/` – Ergebnisse der Jobsuche.
 - `portale.md` – Ablauf und Eigenheiten je Bewerbungsportal. Vor jedem Formular lesen, Neues ergänzen.
@@ -24,8 +25,8 @@ Claude Code findet sie unter `.claude/skills/`, Codex unter `.agents/skills/` (b
 
 ## Werkzeuge
 - `tools/track.py add|set|rm ...` – Tracker ändern und Übersicht neu erzeugen. Bei `add` den Ordner als 6. Argument mitgeben.
-- `tools/anschreiben.py <spec.json>` – Anschreiben bauen (tectonic), prüfen (1 Seite, keine Links/aktiven Inhalte), PDF in den Unterlagen-Ordner legen.
-- `tools/cv.py <spec.json>` – CV pro Stelle aus `cv_daten.json` bauen (Varianten und Stichpunkt-Auswahl nach Fokus-Tags und Begriffen aus der Anzeige, optional neu formulierte Texte aus den echten Fakten, Schutz gegen erfundene Begriffe und Zahlen, 1 Seite, DE/EN), nach `bewerbungen/<dir>/cv.pdf` und in `cv_ordner`.
+- `tools/anschreiben.py <anschreiben_spec.json> [--force]` – Anschreiben prüfen (`tools/anschreiben_lint.py`: Floskeln, Gedankenstrich, Doppelpunkt, Platzhalter, Wortzahl, Firma, Zahlen), escapen, bauen (tectonic, 1 Seite, keine Links/aktiven Inhalte), PDF in den Unterlagen-Ordner legen. Fehler brechen ab, Warnungen nur zeigen.
+- `tools/cv.py <cv_spec.json>` – CV pro Stelle aus `cv_daten.json` bauen (Varianten und Stichpunkt-Auswahl nach Fokus-Tags und Begriffen aus der Anzeige, optional neu formulierte Texte aus den echten Fakten, Schutz gegen erfundene Begriffe und Zahlen, 1 Seite, DE/EN), nach `bewerbungen/<dir>/cv.pdf` und in `cv_ordner`.
 - `tools/stage.py [--cv <dir>] [Anschreiben.pdf]` / `tools/stage.py clean` – Uploads nach `.upload/` kopieren (mit `--cv` den CV dieser Stelle) / aufräumen.
 - `tools/gesendet.py <Anschreiben.pdf>` – nach dem Absenden nach `Anschreiben_gesendet/` verschieben.
 - `tools/browser.js.md` – JS-Snippets für Formular-Scan, Shadow-DOM-Upload, StepStone-Liste.

@@ -44,7 +44,7 @@ Abschnitt für Abschnitt durch `profil.md` gehen und jede TODO-Stelle klären. W
 1. Stammdaten (Name, Adresse, Telefon, E-Mail, Staatsangehörigkeit). Gleich auch in `einstellungen.json` eintragen (name, strasse, plz_ort, ort, telefon, email).
 2. Studium (Studiengang, Hochschule, Semester, Notendurchschnitt, Studienende).
 3. Verfügbarkeit (Werkstudent ab wann und wie viele Stunden, Pflichtpraktikum Start und Mindestdauer laut Studienordnung, Gehaltswunsch, Ort/Umkreis).
-4. Erfahrung. Bei jedem Job nachfragen, was WIRKLICH gemacht wurde. Einen ehrlichen Kurzsatz fürs Anschreiben formulieren und bestätigen lassen.
+4. Erfahrung. Bei jedem Job nachfragen, was WIRKLICH gemacht wurde. Einen ehrlichen Kurzsatz fürs Anschreiben formulieren und bestätigen lassen. Außerdem nach dem "Konkreten Ergebnis" (nur echte Fakten oder Zahlen) und einem "Lern-Beleg" fragen (wie wurde ein neues Tool schnell gelernt). Gibt es keinen, leer lassen, nichts erfinden.
 5. Projekte und Skills, inklusive "Nicht vorhanden" (wichtig, damit nichts behauptet wird).
 6. Motivation und Interessen.
 7. Standardantwort "Qualifikationen" (ca. 700 Zeichen) entwerfen und bestätigen lassen.
@@ -60,7 +60,7 @@ Optional einen Link `unterlagen` im Projekt auf den Ordner anlegen.
 
 ## Schritt 7 – Testlauf
 - `tools/stage.py` ausführen und prüfen, dass alle Dateien gefunden werden, danach `tools/stage.py clean`.
-- Ein Probe-Anschreiben bauen (spec.json mit Firma "Testfirma GmbH", kurzer Text aus dem Profil) mit `tools/anschreiben.py`, PDF zeigen und danach Probe-Ordner und Probe-PDF wieder entfernen (in den Papierkorb).
+- Ein Probe-Anschreiben bauen (anschreiben_spec.json mit Firma "Testfirma GmbH", kurzer Text aus dem Profil) mit `tools/anschreiben.py --force` (der Probetext ist zu kurz für die Prüfung), PDF zeigen und danach Probe-Ordner und Probe-PDF wieder entfernen (in den Papierkorb).
 - `python3 generate_overview.py` ausführen, damit `uebersicht.html` existiert.
 Fehler hier direkt beheben.
 

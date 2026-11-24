@@ -1,4 +1,4 @@
-import sys, pathlib, unittest, tempfile
+import sys, pathlib, unittest, tempfile, shutil
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "tools"))
 import stage
 
@@ -11,6 +11,9 @@ class Stage(unittest.TestCase):
         (u / "cvs/job1/Lebenslauf.pdf").write_text("angepasst")
         self.E = {"unterlagen_ordner": u, "cv_ordner": str(u / "cvs"), "lebenslauf": "Lebenslauf.pdf",
                   "weitere_dokumente": ["Noten.pdf"]}
+
+    def tearDown(self):
+        shutil.rmtree(self.t, ignore_errors=True)
 
     def test_standard_cv(self):
         U = self.t / ".upload"

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Optional: agy-Delegation (Google Antigravity CLI / Gemini, sandbox, spart Claude-Tokens). Ausgabe nur in Datei, Claude liest danach gezielt.
 #   agy.sh eckdaten <url> <out.md>             -> Eckdaten einer Stelle (6 Zeilen)
-#   agy.sh anschreiben <stellenanzeige.md> <out.json> [de|en]  -> spec.json-Entwurf für tools/anschreiben.py
+#   agy.sh anschreiben <stellenanzeige.md> <out.json> [de|en]  -> anschreiben_spec.json-Entwurf für tools/anschreiben.py (Regeln aus docs/anschreiben_regeln.md)
 #   agy.sh recherche "<auftrag>" <out.md>      -> Jobsuche, Tabelle mit geprüften Links
 #   agy.sh anzeige <url|titel+firma> <out.md>   -> Stellenanzeige als Markdown (Aufgaben/Profil/Angebot)
 #   agy.sh frei "<prompt>" <out.md>            -> beliebiger Auftrag
@@ -15,9 +15,10 @@ Ort/Arbeitsmodell: ...
 Dauer/Stunden/Start: ...
 Unterlagen/Anschreiben: ...
 Status: offen|geschlossen|unklar (Seite leer oder nicht ladbar = unklar)"; OUT="$2";;
-anschreiben) L="${3:-de}"; P="Schreibe ein Anschreiben für diese Stelle. Nutze NUR Fakten aus dem Profil, nichts erfinden, Lücken ehrlich benennen (\"noch nicht gearbeitet, arbeite mich gerne ein\").
-Regeln: Sprache $L, 4 kurze Absätze, ca. 170-200 Wörter, natürlich, nicht übertrieben, nicht nach KI klingend, KEINE Doppelpunkte in Sätzen, keine Links/URLs, kein Gedankenstrich-Stil. Keine Floskeln/Steigerungen wie fundiert, genau, zügig, leidenschaftlich, eigenständig verstärken. Erfahrung exakt wie im Profil beschreiben, nichts versprechen, was nicht belegt ist. Erster Satz nicht 'Im Rahmen', sondern 'ich studiere ...' (Anrede endet mit Komma). Verfügbarkeit, Dauer und Start genau wie im Profil (Abschnitt Verfügbarkeit). LaTeX: & als \\\\& schreiben.
-Gib NUR gültiges JSON aus (kein Markdown-Codeblock) mit Schlüsseln: dir, pdf, lang, firma, adresse (Zeilen mit \\\\\\\\ trennen), betreff, anrede, text (Absätze mit \\n\\n). dir = $(date +%F)_<firma>_<stelle-kurz> (je max 3 Wörter, klein, Bindestriche), pdf = Anschreiben_<Firma>_<Stelle-kurz>.pdf (max 4 Wörter, Unterstriche).
+anschreiben) L="${3:-de}"; REGELN="$(cat "$J/docs/anschreiben_regeln.md")"; P="Schreibe ein Anschreiben für diese Stelle nach den REGELN unten. Nutze NUR Fakten aus dem Profil, nichts erfinden, Lücken ehrlich benennen (\"noch nicht gearbeitet, arbeite mich gerne ein\"). Sprache $L. Verfügbarkeit, Dauer und Start genau wie im Profil (Abschnitt Verfügbarkeit). Keine Links/URLs. Anrede endet mit Komma, der erste Satz beginnt danach klein. Schreibe & ganz normal (wird automatisch escaped).
+Gib NUR gültiges JSON aus (kein Markdown-Codeblock) mit Schlüsseln: dir, pdf, lang, firma, adresse (Zeilen mit \\\\\\\\ trennen), betreff, kennziffer (leer lassen, wenn keine), anrede, text (Absätze mit \\n\\n). dir = $(date +%F)_<firma>_<stelle-kurz> (je max 3 Wörter, klein, Bindestriche), pdf = Anschreiben_<Firma>_<Stelle-kurz>.pdf (max 4 Wörter, Unterstriche).
+=== REGELN ===
+$REGELN
 === PROFIL ===
 $PROFIL
 === STELLE ===
