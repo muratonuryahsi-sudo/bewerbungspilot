@@ -3,7 +3,7 @@
 pruefe(text, firma, lang, profil, anzeige) -> (fehler, warnungen)
 Fehler brechen den Bau ab (außer --force), Warnungen werden nur gezeigt.
 """
-import re
+import re, unicodedata
 
 # Harte Floskeln (Fehler)
 FLOSKELN = {
@@ -30,6 +30,24 @@ PLATZHALTER = [r"\bTODO\b", r"<<", r">>", r"\[(Firma|Unternehmen|Name|Ansprechpa
 RECHTSFORM = {"gmbh", "ag", "se", "kg", "mbh", "ltd", "co", "ohg", "ug", "kgaa", "inc", "llc", "plc", "sa", "ev",
               "haftungsbeschränkt", "limited"}
 MONATE = r"(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember|January|February|March|June|July|October|December)"
+
+
+def bereinige(s):
+    """Unsichtbare Zeichen entfernen (Zero-Width, Bidi, Tag-Zeichen, Soft Hyphen, Steuerzeichen) und
+    Sonderleerzeichen (NBSP, schmale Spaces) durch ein normales Leerzeichen ersetzen. Gibt (text, anzahl) zurück."""
+    out, n = [], 0
+    for ch in s:
+        cat = unicodedata.category(ch)
+        if ch in "\n\t" or ch == " ":
+            out.append(ch)
+        elif cat == "Zs" or ch in "\u2028\u2029":
+            out.append(" "); n += 1
+        elif cat in ("Cf", "Cc", "Co", "Cn") or 0xFE00 <= ord(ch) <= 0xFE0F or ch == "\u034f":
+            n += 1
+        else:
+            out.append(ch)
+    text = "".join(out)
+    return (re.sub(r" {2,}", " ", text) if n else text), n
 
 
 def _norm(s):

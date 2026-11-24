@@ -112,6 +112,27 @@ class Escape(unittest.TestCase):
     def test_entescape(self):
         self.assertEqual(A.entescape("a \\& b \\% c"), "a & b % c")
 
+class Unsichtbar(unittest.TestCase):
+    def test_bereinige_entfernt_unsichtbares(self):
+        roh = "Hal\u200blo\u00a0Welt\u202f\ufeff\u00ad\U000e0041 ok\u202e"
+        text, n = L.bereinige(roh)
+        self.assertEqual(text, "Hallo Welt ok")
+        for ch in "\u200b\u00a0\u202f\ufeff\u00ad\U000e0041\u202e":
+            self.assertNotIn(ch, text)
+        self.assertGreaterEqual(n, 7)
+
+    def test_normaler_text_bleibt_unveraendert(self):
+        s = "Größe, Straße & Café\n\nAbsatz 2 – 3 Ø 10:30"
+        self.assertEqual(L.bereinige(s), (s, 0))
+
+    def test_bau_meldet_entfernte_zeichen(self):
+        spec = {"dir": "x", "pdf": "x.pdf", "firma": "Beispiel GmbH", "adresse": "A", "betreff": "B",
+                "anrede": "Hallo,", "text": "Beispiel\u200b GmbH teste\u00a0ich."}
+        s, n = A.bereinige_spec(spec)
+        self.assertEqual(n, 2)
+        self.assertEqual(s["text"], "Beispiel GmbH teste ich.")
+        self.assertIn("\u200b", spec["text"])
+
 
 @unittest.skipUnless(shutil.which("tectonic") and shutil.which("pdfinfo"), "tectonic/pdfinfo fehlt")
 class Bauen(unittest.TestCase):

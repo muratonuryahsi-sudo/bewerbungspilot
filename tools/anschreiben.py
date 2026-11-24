@@ -10,7 +10,7 @@ mit --force wird trotzdem gebaut. Baut mit tectonic, prüft 1 Seite und keine /U
 legt .tex+PDF in bewerbungen/<dir>/ und das PDF oben in den Unterlagen-Ordner.
 """
 import json, re, sys, subprocess, shutil, pathlib, datetime
-from anschreiben_lint import pruefe
+from anschreiben_lint import pruefe, bereinige
 
 MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober",
           "November", "Dezember"]
@@ -49,6 +49,14 @@ def baue_tex(s, E, vorlage, heute=None):
     return tex
 
 
+def bereinige_spec(s):
+    s, n = dict(s), 0
+    for k in ("firma", "adresse", "betreff", "kennziffer", "anrede", "text"):
+        if isinstance(s.get(k), str):
+            s[k], m = bereinige(s[k]); n += m
+    return s, n
+
+
 def lese(p):
     p = pathlib.Path(p)
     return p.read_text(encoding="utf-8") if p.exists() else ""
@@ -57,8 +65,11 @@ def lese(p):
 def bauen(s, E, root, force=False):
     """Gibt (pdf, fehler, warnungen) zurück. Bei Fehlern ohne force wird nicht gebaut (pdf=None)."""
     root = pathlib.Path(root)
+    s, entfernt = bereinige_spec(s)
     fehler, warn = pruefe(entescape(s["text"]), s["firma"], s.get("lang", "de"), lese(root / "profil.md"),
                           lese(root / "bewerbungen" / s["dir"] / "stellenanzeige.md"))
+    if entfernt:
+        warn.insert(0, f"{entfernt} unsichtbare Zeichen entfernt (Zero-Width, Sonderleerzeichen o. ä.)")
     if fehler and not force:
         return None, fehler, warn
     tex = baue_tex(s, E, (root / "vorlagen/anschreiben.tex").read_text(encoding="utf-8"))
