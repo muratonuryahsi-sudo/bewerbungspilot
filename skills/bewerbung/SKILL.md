@@ -23,7 +23,13 @@ Fähigkeiten aus `einstellungen.json` beachten: `browser`, `gmail`, `agy`. Ist e
 2. Suchen: `agy: true` → `tools/agy.sh recherche "<Auftrag>" recherche/<datum>_<art>.md`. Sonst selbst mit Websuche, 4–5 Anfragen parallel (Art + Fachrichtung + Ort, Umkreis, große Arbeitgeber der Region, StepStone/Indeed/LinkedIn/Hochschul-Jobportal).
 3. Jede Stelle auf der Originalseite prüfen (noch offen, Ort, Studiengang, Dauer). Nur offene Stellen mit funktionierendem Link.
 4. Bereits in `bewerbungen.json` stehende Stellen weglassen.
-4b. **CV pro Stelle (nur wenn `cv_daten.json` existiert).** Aus der Anzeige 2–4 Fokus-Tags aus der Tag-Liste in `cv_daten.json` wählen (z. B. qa, automatisierung, entwicklung), Sprache der Anzeige nehmen. `spec.json` mit `dir`, `lang`, `links` (false für Portale), `fokus` schreiben, `python3 tools/cv.py <spec.json>`. Das Tool wählt nur vorformulierte Varianten aus den Daten der Person und erfindet nichts. Bei Fehlern (zu lang, unbekannter Tag) Meldung lesen und Fokus anpassen. Kurz sagen, welche Schwerpunkte gewählt wurden. Der CV liegt in `bewerbungen/<dir>/cv.pdf` und `uebersicht.html` zeigt ihn mit.
+4b. **CV pro Stelle (nur wenn `cv_daten.json` existiert).** Auf die Anzeige zuschneiden, ohne etwas zu erfinden. Ablauf:
+   1. Fokus-Tags aus der Tag-Liste in `cv_daten.json` wählen (2–4), Sprache der Anzeige nehmen.
+   2. `anzeige_begriffe` = Fachbegriffe und Tools aus der Anzeige (z. B. C++, SAP, Jira, Python).
+   3. Optional `texte` = neu formulierte Stichpunkte je Eintrags-`id` und `profil` = 1–2 Sätze. Nur aus den Fakten der Person (`profil.md`, `cv_daten.json`) umformulieren und passend betonen. Nichts behaupten, was nicht belegt ist, keine neuen Zahlen, keine Tools, die die Person nicht hat. Fordert die Anzeige etwas, das fehlt (z. B. C++), nicht erwähnen, sondern die vorhandene verwandte Erfahrung zeigen.
+   4. `spec.json` mit `dir`, `lang`, `links` (false für Portale), `fokus`, `anzeige` (Pfad zur `stellenanzeige.md`), `anzeige_begriffe`, `texte`, `profil` schreiben, dann `python3 tools/cv.py <spec.json>`.
+   5. Das Tool schützt: Begriffe aus `anzeige_begriffe`, die nicht in `begriffe` stehen, und unbekannte Zahlen führen zu einem Fehler. Es nennt Treffer aus der Anzeige, neu formulierte Punkte und gekürzte Stellen. Alles gegen `profil.md` prüfen und der Person in 2–3 Zeilen zeigen (Schwerpunkte, neu formuliert, weggelassen).
+   Der CV liegt in `bewerbungen/<dir>/cv.pdf`, `uebersicht.html` zeigt ihn mit.
 5. Top 5–10 nach Passung sortieren und in `recherche/<datum>_<art>.md` speichern (Firma, Stelle, Ort, Passung 1–5, Grund, Link). Im Chat nur eine kurze Liste.
 6. Die Person wählt aus → pro Stelle "Neue Stelle".
 

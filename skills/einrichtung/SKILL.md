@@ -37,7 +37,7 @@ Erst weitermachen, wenn die Pflicht-Programme da sind, oder die Person sagt, sie
 ## Schritt 4 – Lebenslauf einlesen (spart viel Tipparbeit)
 Nach dem Pfad zum aktuellen Lebenslauf (PDF) fragen. Mit `pdftotext -layout` lesen und daraus einen Entwurf für `profil.md` machen (Stammdaten, Studium, Erfahrung, Projekte, Skills, Sprachen). Den Entwurf abschnittsweise zeigen und bestätigen lassen. Kein Lebenslauf vorhanden → die Abschnitte in Schritt 5 einzeln abfragen.
 
-Optional danach `cv_daten.json` anlegen (Vorlage `vorlagen/cv_daten.beispiel.json`, Format siehe Beispiel): dieselben Fakten als Stationen, Projekte und Skill-Zeilen mit Tags, dazu je Stichpunkt 2–3 Varianten mit unterschiedlichem Schwerpunkt, jeweils auf Deutsch und Englisch. Nur Fakten aus dem Lebenslauf der Person, nichts dazuerfinden. Die Varianten als Tabelle zeigen und freigeben lassen, erst dann speichern. Damit baut `tools/cv.py` später pro Stelle einen passenden CV.
+Optional danach `cv_daten.json` anlegen (Vorlage `vorlagen/cv_daten.beispiel.json`, Format siehe Beispiel): dieselben Fakten als Stationen, Projekte und Skill-Zeilen mit Tags, dazu je Stichpunkt 2–3 Varianten mit unterschiedlichem Schwerpunkt, jeweils auf Deutsch und Englisch. Nur Fakten aus dem Lebenslauf der Person, nichts dazuerfinden. Die Varianten als Tabelle zeigen und freigeben lassen, erst dann speichern. Dazu `begriffe` (alle echten Tools und Skills der Person, die Obergrenze dessen, was der CV behaupten darf) und je Eintrag `keywords`. Damit baut `tools/cv.py` später pro Stelle einen CV, der zum Anzeigentext passt.
 
 ## Schritt 5 – Profil vervollständigen
 Abschnitt für Abschnitt durch `profil.md` gehen und jede TODO-Stelle klären. Wichtig sind vor allem:

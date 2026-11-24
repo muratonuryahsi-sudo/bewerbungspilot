@@ -25,7 +25,7 @@ Claude Code findet sie unter `.claude/skills/`, Codex unter `.agents/skills/` (b
 ## Werkzeuge
 - `tools/track.py add|set|rm ...` – Tracker ändern und Übersicht neu erzeugen. Bei `add` den Ordner als 6. Argument mitgeben.
 - `tools/anschreiben.py <spec.json>` – Anschreiben bauen (tectonic), prüfen (1 Seite, keine Links/aktiven Inhalte), PDF in den Unterlagen-Ordner legen.
-- `tools/cv.py <spec.json>` – CV pro Stelle aus `cv_daten.json` bauen (nur vorformulierte, wahre Varianten nach Fokus-Tags, 1 Seite, DE/EN), nach `bewerbungen/<dir>/cv.pdf` und in `cv_ordner`.
+- `tools/cv.py <spec.json>` – CV pro Stelle aus `cv_daten.json` bauen (Varianten und Stichpunkt-Auswahl nach Fokus-Tags und Begriffen aus der Anzeige, optional neu formulierte Texte aus den echten Fakten, Schutz gegen erfundene Begriffe und Zahlen, 1 Seite, DE/EN), nach `bewerbungen/<dir>/cv.pdf` und in `cv_ordner`.
 - `tools/stage.py [--cv <dir>] [Anschreiben.pdf]` / `tools/stage.py clean` – Uploads nach `.upload/` kopieren (mit `--cv` den CV dieser Stelle) / aufräumen.
 - `tools/gesendet.py <Anschreiben.pdf>` – nach dem Absenden nach `Anschreiben_gesendet/` verschieben.
 - `tools/browser.js.md` – JS-Snippets für Formular-Scan, Shadow-DOM-Upload, StepStone-Liste.

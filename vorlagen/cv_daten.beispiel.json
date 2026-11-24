@@ -42,7 +42,8 @@
       "en": "**Focus areas:** Software Development, Process Management"
      }
     ]
-   ]
+   ],
+   "keywords": []
   }
  ],
  "erfahrung": [
@@ -95,6 +96,11 @@
       "en": "Target/actual data comparisons in Excel, 25 % faster than the year before"
      }
     ]
+   ],
+   "keywords": [
+    "Jira",
+    "Excel",
+    "Tests"
    ]
   }
  ],
@@ -127,6 +133,12 @@
       "en": "REST API with FastAPI and PostgreSQL, CI via GitHub Actions"
      }
     ]
+   ],
+   "keywords": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "GitHub Actions"
    ]
   },
   {
@@ -157,6 +169,12 @@
       "en": "Automated invoice process with BPMN/DMN and n8n"
      }
     ]
+   ],
+   "keywords": [
+    "n8n",
+    "BPMN",
+    "DMN",
+    "Camunda"
    ]
   }
  ],
@@ -182,5 +200,19 @@
  "sprachen": {
   "de": "Sprachen: Deutsch (Muttersprache), Englisch (fließend)",
   "en": "Languages: German (native), English (fluent)"
- }
+ },
+ "begriffe": [
+  "Python",
+  "SQL",
+  "FastAPI",
+  "PostgreSQL",
+  "GitHub Actions",
+  "Jira",
+  "Excel",
+  "n8n",
+  "Camunda",
+  "BPMN",
+  "DMN",
+  "Tests"
+ ]
 }

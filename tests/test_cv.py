@@ -7,13 +7,13 @@ def P(tags, de, en=None):
     return {"tags": tags, "de": de, "en": en or de + " EN"}
 
 
-def item(id, tags, gruppen, pflicht=False):
-    return {"id": id, "tags": tags, "pflicht": pflicht,
+def item(id, tags, gruppen, pflicht=False, kw=None):
+    return {"id": id, "tags": tags, "pflicht": pflicht, "keywords": kw or [],
             "kopf": {"de": [id, "Ort", "Titel", "2026"], "en": [id, "Place", "Title", "2026"]}, "gruppen": gruppen}
 
 
 def daten(**kw):
-    d = {"tags": ["qa", "automatisierung", "entwicklung", "neutral"], "ausbildung": [], "erfahrung": [], "projekte": [],
+    d = {"tags": ["qa", "automatisierung", "entwicklung", "neutral"], "begriffe": [], "ausbildung": [], "erfahrung": [], "projekte": [],
          "skills": [], "sprachen": {"de": "Deutsch", "en": "German"}}
     d.update(kw)
     return d
@@ -92,6 +92,75 @@ class Auswahl(unittest.TestCase):
                           {"id": "s2", "tags": ["automatisierung"], "de": "A", "en": "A"}])
         r = cv.waehle(d, ["automatisierung"], "de", immer)
         self.assertEqual(r["skills"], ["A", "Q"])
+
+
+class Anzeige(unittest.TestCase):
+    N = [[P(["neutral"], "x")]]
+
+    def test_hat_begriff_wortgrenzen(self):
+        self.assertTrue(cv._hat("Kenntnisse in C++ gesucht", "C++"))
+        self.assertFalse(cv._hat("JavaScript", "Java"))
+        self.assertTrue(cv._hat("wir nutzen JAVA.", "Java"))
+
+    def test_keyword_hebt_projekt(self):
+        d = daten(begriffe=["n8n", "Docker"], projekte=[item("p1", [], self.N, kw=["Docker"]), item("p2", [], self.N, kw=["n8n"])])
+        r = cv.waehle(d, [], "de", immer, anzeige="Wir nutzen n8n täglich")
+        self.assertEqual([p["id"] for p in r["projekte"]], ["p2", "p1"])
+        self.assertEqual(r["info"]["treffer"], ["n8n"])
+
+    def test_keyword_hebt_variante(self):
+        d = daten(begriffe=["Docker"], erfahrung=[item("a", [], [[P(["neutral"], "allgemein"), P([], "mit Docker im Einsatz")]])])
+        r = cv.waehle(d, [], "de", immer, anzeige="Docker erwünscht")
+        self.assertEqual(r["erfahrung"][0]["punkte"], ["mit Docker im Einsatz"])
+
+    def test_skill_werkzeuge_sortiert(self):
+        sk = [{"id": "s", "tags": [], "de": "Office (gut): Excel, Jira, Confluence", "en": "Office (good): Excel, Jira, Confluence"}]
+        d = daten(begriffe=["Excel", "Jira", "Confluence"], skills=sk)
+        r = cv.waehle(d, [], "de", immer, anzeige="Confluence und Jira")
+        self.assertEqual(r["skills"], ["Office (gut): Jira, Confluence, Excel"])
+
+    def test_texte_ersetzt_punkte(self):
+        d = daten(erfahrung=[item("a", [], self.N)])
+        r = cv.waehle(d, [], "de", immer, texte={"a": ["neu eins", "neu zwei"]})
+        self.assertEqual(r["erfahrung"][0]["punkte"], ["neu eins", "neu zwei"])
+        self.assertEqual(r["info"]["neu"], {"a": ["neu eins", "neu zwei"]})
+
+    def test_texte_unbekannte_zahl_fehler(self):
+        d = daten(erfahrung=[item("a", [], [[P(["neutral"], "25 % schneller")]])])
+        with self.assertRaises(cv.CvFehler) as c:
+            cv.waehle(d, [], "de", immer, texte={"a": ["50 % schneller"]})
+        self.assertIn("50", str(c.exception))
+
+    def test_texte_bekannte_zahl_ok(self):
+        d = daten(erfahrung=[item("a", [], [[P(["neutral"], "25 % schneller")]])])
+        r = cv.waehle(d, [], "de", immer, texte={"a": ["Um 25 % beschleunigt"]})
+        self.assertEqual(r["erfahrung"][0]["punkte"], ["Um 25 % beschleunigt"])
+
+    def test_texte_unbekannte_id_fehler(self):
+        with self.assertRaises(cv.CvFehler):
+            cv.waehle(daten(), [], "de", immer, texte={"nix": ["a"]})
+
+    def test_fremder_begriff_fehler(self):
+        d = daten(begriffe=["Python"], erfahrung=[item("a", [], self.N)])
+        with self.assertRaises(cv.CvFehler) as c:
+            cv.waehle(d, [], "de", immer, texte={"a": ["Erfahrung mit C++"]}, anzeige_begriffe=["C++", "Python"])
+        self.assertIn("C++", str(c.exception))
+
+    def test_eigener_begriff_erlaubt(self):
+        d = daten(begriffe=["Python"], erfahrung=[item("a", [], self.N)])
+        r = cv.waehle(d, [], "de", immer, texte={"a": ["Python-Projekt"]}, anzeige_begriffe=["Python"])
+        self.assertEqual(r["erfahrung"][0]["punkte"], ["Python-Projekt"])
+
+    def test_profil_wird_ausgegeben_und_geprueft(self):
+        d = daten(begriffe=["Python"])
+        self.assertEqual(cv.waehle(d, [], "de", immer, profil="Student mit Python")["profil"], "Student mit Python")
+        with self.assertRaises(cv.CvFehler):
+            cv.waehle(d, [], "de", immer, profil="Student mit SAP", anzeige_begriffe=["SAP"])
+
+    def test_gekuerzt_wird_gemeldet(self):
+        d = daten(projekte=[item("p1", [], self.N), item("p2", [], self.N)])
+        r = cv.waehle(d, [], "de", lambda a: len(a["projekte"]) <= 1)
+        self.assertEqual(len(r["info"]["gekuerzt"]), 1)
 
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
