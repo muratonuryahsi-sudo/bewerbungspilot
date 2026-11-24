@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Erzeugt uebersicht.html und bewerbungen.md aus bewerbungen.json."""
-import json, html, datetime, pathlib, re
+import json, html, datetime, pathlib, re, subprocess
 from zoneinfo import ZoneInfo
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -42,6 +42,14 @@ def anschreiben_text(folder):
         return text.strip()
     return ""
 
+def cv_text(folder):
+    """Text des für die Stelle gebauten CV (cv.pdf aus tools/cv.py), leer wenn keiner existiert."""
+    pdf = folder / "cv.pdf"
+    if not pdf.exists():
+        return ""
+    r = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True)
+    return re.sub(r"\n{3,}", "\n\n", r.stdout).strip() if r.returncode == 0 else ""
+
 def md_html(md):
     """Kleines Markdown → HTML (Überschriften, Listen, fett) für stellenanzeige.md."""
     out, in_list = [], False
@@ -67,9 +75,13 @@ def details(d):
     anzeige = md_html(ad.read_text(encoding="utf-8")) if ad.exists() else "<p>Keine Anzeige gespeichert.</p>"
     brief = anschreiben_text(folder)
     brief = f'<div class="letter">{html.escape(brief)}</div>' if brief else "<p>Kein Anschreiben (nicht verlangt).</p>"
-    return (f'<details class="more"><summary>Anzeige &amp; Anschreiben</summary>'
+    lebenslauf = cv_text(folder)
+    lebenslauf = (f'<div class="letter">{html.escape(lebenslauf)}</div>' if lebenslauf
+                  else "<p>Standard-Lebenslauf (nicht auf die Stelle angepasst).</p>")
+    return (f'<details class="more"><summary>Anzeige, Anschreiben &amp; Lebenslauf</summary>'
             f'<div class="panes"><div class="pane"><h3>Stellenanzeige</h3>{anzeige}</div>'
-            f'<div class="pane"><h3>Mein Anschreiben</h3>{brief}</div></div></details>')
+            f'<div class="pane"><h3>Mein Anschreiben</h3>{brief}</div>'
+            f'<div class="pane"><h3>Mein Lebenslauf</h3>{lebenslauf}</div></div></details>')
 
 def rows(items):
     out = []
@@ -124,7 +136,7 @@ details.more {{ margin-top:8px; }}
 details.more summary {{ cursor:pointer; color:var(--open); font-size:13px; list-style:none; }}
 details.more summary::-webkit-details-marker {{ display:none; }}
 details.more summary::before {{ content:"▸ "; }} details.more[open] summary::before {{ content:"▾ "; }}
-.panes {{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px; min-width:620px; }}
+.panes {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:12px; min-width:620px; }}
 .pane {{ background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:13px; }}
 .pane h3 {{ font-size:14px; margin:0 0 8px; }} .pane h4 {{ font-size:13px; margin:12px 0 4px; }}
 .pane p {{ margin:4px 0; }} .pane ul {{ margin:4px 0; padding-left:18px; }}

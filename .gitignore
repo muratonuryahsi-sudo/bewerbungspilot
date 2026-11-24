@@ -11,3 +11,4 @@ unterlagen
 *.err
 .DS_Store
 __pycache__/
+cv_daten.json

@@ -50,6 +50,7 @@ Der Agent führt dich in 8 Schritten durch die Einrichtung (ca. 15–20 Minuten)
 
 ### 4. Benutzen
 - Stellenlink schicken: `/bewerbung https://...` (Codex: einfach den Link schicken). Du bekommst eine Kurzbewertung, auf Wunsch ein Anschreiben, und mit "bewerben" füllt der Agent das Formular aus.
+- Optional CV pro Stelle: Mit `cv_daten.json` (entsteht in der Einrichtung) baut der Agent für jede Stelle einen Lebenslauf, der die passenden Projekte und Skills nach vorn stellt. Er nimmt nur Varianten, die du freigegeben hast. Die Übersicht zeigt, welcher CV verwendet wurde.
 - `Jobs suchen`: Recherche nach deinen Suchkriterien
 - `Status`: Mails abgleichen und Tracker aktualisieren
 - `uebersicht.html` im Browser öffnen
@@ -62,9 +63,9 @@ Vor dem Absenden zeigt der Agent immer eine Zusammenfassung und wartet auf dein 
 | `AGENTS.md` | Regeln für jeden Agenten (`CLAUDE.md` verweist darauf) |
 | `skills/einrichtung`, `skills/bewerbung` | Abläufe, verlinkt nach `.claude/skills` und `.agents/skills` |
 | `vorlagen/` | Profil-, Einstellungs- und Anschreiben-Vorlage |
-| `tools/` | Tracker, Anschreiben-Bau, Uploads, optional agy |
+| `tools/` | Tracker, Anschreiben-Bau, CV pro Stelle, Uploads, optional agy |
 | `portale.md` | Erfahrungen mit Bewerbungsportalen (Taleo, Workday, StepStone …) |
-| `profil.md`, `einstellungen.json`, `bewerbungen.json`, `bewerbungen/` | deine Daten, nur lokal (`.gitignore`) |
+| `profil.md`, `cv_daten.json`, `einstellungen.json`, `bewerbungen.json`, `bewerbungen/` | deine Daten, nur lokal (`.gitignore`) |
 
 Neue Erkenntnisse zu Portalen gerne per Pull Request in `portale.md` teilen, aber ohne persönliche Daten.
 

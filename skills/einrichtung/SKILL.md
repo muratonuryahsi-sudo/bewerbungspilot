@@ -37,6 +37,8 @@ Erst weitermachen, wenn die Pflicht-Programme da sind, oder die Person sagt, sie
 ## Schritt 4 – Lebenslauf einlesen (spart viel Tipparbeit)
 Nach dem Pfad zum aktuellen Lebenslauf (PDF) fragen. Mit `pdftotext -layout` lesen und daraus einen Entwurf für `profil.md` machen (Stammdaten, Studium, Erfahrung, Projekte, Skills, Sprachen). Den Entwurf abschnittsweise zeigen und bestätigen lassen. Kein Lebenslauf vorhanden → die Abschnitte in Schritt 5 einzeln abfragen.
 
+Optional danach `cv_daten.json` anlegen (Vorlage `vorlagen/cv_daten.beispiel.json`, Format siehe Beispiel): dieselben Fakten als Stationen, Projekte und Skill-Zeilen mit Tags, dazu je Stichpunkt 2–3 Varianten mit unterschiedlichem Schwerpunkt, jeweils auf Deutsch und Englisch. Nur Fakten aus dem Lebenslauf der Person, nichts dazuerfinden. Die Varianten als Tabelle zeigen und freigeben lassen, erst dann speichern. Damit baut `tools/cv.py` später pro Stelle einen passenden CV.
+
 ## Schritt 5 – Profil vervollständigen
 Abschnitt für Abschnitt durch `profil.md` gehen und jede TODO-Stelle klären. Wichtig sind vor allem:
 1. Stammdaten (Name, Adresse, Telefon, E-Mail, Staatsangehörigkeit). Gleich auch in `einstellungen.json` eintragen (name, strasse, plz_ort, ort, telefon, email).
@@ -51,6 +53,7 @@ Abschnitt für Abschnitt durch `profil.md` gehen und jede TODO-Stelle klären. W
 ## Schritt 6 – Unterlagen-Ordner
 Fragen, wo die Bewerbungsunterlagen liegen sollen (Standard `~/Bewerbungsunterlagen`, iCloud/OneDrive geht auch). Ordner anlegen, falls nötig, plus Unterordner `Anschreiben_gesendet/`. Inhalt auflisten und gemeinsam festlegen:
 - `lebenslauf` = Dateiname des Lebenslaufs
+- `cv_ordner` = wohin `tools/cv.py` die CVs pro Stelle kopiert (Standard `<unterlagen_ordner>/CV_pro_Stelle`), `cv_en` = Dateiname des englischen CV, optional `github` und `linkedin` (nur der Name hinter der URL) für die Kopfzeile
 - `weitere_dokumente` = Notenspiegel, Immatrikulationsbescheinigung, Arbeitszeugnisse usw.
 Fehlende Dokumente nennen (z. B. aktuelle Immatrikulationsbescheinigung). Hinweis: PDFs ohne Links, max. 5 MB pro Datei.
 Optional einen Link `unterlagen` im Projekt auf den Ordner anlegen.

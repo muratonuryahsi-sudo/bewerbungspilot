@@ -23,6 +23,7 @@ Fähigkeiten aus `einstellungen.json` beachten: `browser`, `gmail`, `agy`. Ist e
 2. Suchen: `agy: true` → `tools/agy.sh recherche "<Auftrag>" recherche/<datum>_<art>.md`. Sonst selbst mit Websuche, 4–5 Anfragen parallel (Art + Fachrichtung + Ort, Umkreis, große Arbeitgeber der Region, StepStone/Indeed/LinkedIn/Hochschul-Jobportal).
 3. Jede Stelle auf der Originalseite prüfen (noch offen, Ort, Studiengang, Dauer). Nur offene Stellen mit funktionierendem Link.
 4. Bereits in `bewerbungen.json` stehende Stellen weglassen.
+4b. **CV pro Stelle (nur wenn `cv_daten.json` existiert).** Aus der Anzeige 2–4 Fokus-Tags aus der Tag-Liste in `cv_daten.json` wählen (z. B. qa, automatisierung, entwicklung), Sprache der Anzeige nehmen. `spec.json` mit `dir`, `lang`, `links` (false für Portale), `fokus` schreiben, `python3 tools/cv.py <spec.json>`. Das Tool wählt nur vorformulierte Varianten aus den Daten der Person und erfindet nichts. Bei Fehlern (zu lang, unbekannter Tag) Meldung lesen und Fokus anpassen. Kurz sagen, welche Schwerpunkte gewählt wurden. Der CV liegt in `bewerbungen/<dir>/cv.pdf` und `uebersicht.html` zeigt ihn mit.
 5. Top 5–10 nach Passung sortieren und in `recherche/<datum>_<art>.md` speichern (Firma, Stelle, Ort, Passung 1–5, Grund, Link). Im Chat nur eine kurze Liste.
 6. Die Person wählt aus → pro Stelle "Neue Stelle".
 
@@ -32,7 +33,7 @@ Fähigkeiten aus `einstellungen.json` beachten: `browser`, `gmail`, `agy`. Ist e
 3. **Anzeige sichern.** Ordner `bewerbungen/<JJJJ-MM-TT>_<firma>_<stelle>/` anlegen, Anzeige als `stellenanzeige.md` speichern (Eckdaten, Aufgaben, Profil, Angebot, Unterlagen). Mit agy: `tools/agy.sh anzeige <url> <ordner>/stellenanzeige.md`.
 4. **Anschreiben (wenn verlangt oder sinnvoll).** Sprache der Anzeige, 4 kurze Absätze, ca. 200 Wörter. Nur Fakten aus `profil.md`, keine Doppelpunkte in Sätzen, Lücken ehrlich. `spec.json` im Ordner schreiben (Felder siehe Kopf von `tools/anschreiben.py`, `&` als `\\&`), dann `python3 tools/anschreiben.py <spec.json>`. Entwurf optional per `tools/agy.sh anschreiben`, danach gegen das Profil prüfen. Das PDF liegt danach im Unterlagen-Ordner.
 5. **Formular (wenn die Person "bewerben" sagt).** Vorher `portale.md` lesen.
-   - `python3 tools/stage.py <Anschreiben.pdf>` → Dateien liegen in `.upload/`.
+   - `python3 tools/stage.py <Anschreiben.pdf>` → Dateien liegen in `.upload/`. Mit angepasstem CV (siehe 4b) stattdessen `python3 tools/stage.py --cv <dir> <Anschreiben.pdf>`.
    - Mit Browser: Cookies ablehnen, Felder aus dem Profil, zuerst Uploads, dann Textfelder, danach Werte per Formular-Scan (`tools/browser.js.md`) prüfen. Lebenslauf-Feld nur Lebenslauf, Rest einzeln. `maxLength` beachten.
    - Ohne Browser: Liste aller Felder mit fertigen Antworten zum Kopieren und die Dateiliste ausgeben. Die Person füllt selbst aus.
    - Login, Konto, Einwilligungen, CAPTCHA macht immer die Person.

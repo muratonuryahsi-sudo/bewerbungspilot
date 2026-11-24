@@ -8,9 +8,16 @@
  "email": "vorname.nachname@example.com",
  "unterlagen_ordner": "~/Bewerbungsunterlagen",
  "lebenslauf": "Lebenslauf.pdf",
- "weitere_dokumente": ["Notenspiegel.pdf", "Immatrikulationsbescheinigung.pdf"],
+ "weitere_dokumente": [
+  "Notenspiegel.pdf",
+  "Immatrikulationsbescheinigung.pdf"
+ ],
  "agent": "claude",
  "agy": false,
  "browser": true,
- "gmail": false
+ "gmail": false,
+ "cv_ordner": "~/Bewerbungsunterlagen/CV_pro_Stelle",
+ "cv_en": "CV.pdf",
+ "github": "",
+ "linkedin": ""
 }

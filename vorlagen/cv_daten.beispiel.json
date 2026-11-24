@@ -1,0 +1,186 @@
+{
+ "tags": [
+  "qa",
+  "test",
+  "automatisierung",
+  "prozess",
+  "entwicklung",
+  "backend",
+  "ki",
+  "devops",
+  "scrum",
+  "daten",
+  "beratung",
+  "neutral"
+ ],
+ "ausbildung": [
+  {
+   "id": "uni",
+   "tags": [],
+   "pflicht": true,
+   "kopf": {
+    "de": [
+     "Beispiel-Hochschule",
+     "Musterstadt, Deutschland",
+     "Informatik (B.Sc.), 5. Semester",
+     "seit 10/2023"
+    ],
+    "en": [
+     "Example University",
+     "Musterstadt, Germany",
+     "B.Sc. Computer Science, 5th semester",
+     "since 10/2023"
+    ]
+   },
+   "gruppen": [
+    [
+     {
+      "tags": [
+       "neutral"
+      ],
+      "de": "**Schwerpunkte:** Softwareentwicklung, Prozessmanagement",
+      "en": "**Focus areas:** Software Development, Process Management"
+     }
+    ]
+   ]
+  }
+ ],
+ "erfahrung": [
+  {
+   "id": "firma1",
+   "tags": [
+    "qa",
+    "test"
+   ],
+   "pflicht": true,
+   "kopf": {
+    "de": [
+     "Beispiel GmbH",
+     "Musterstadt, Deutschland",
+     "Werkstudent, Qualitätssicherung",
+     "01/2026 -- heute"
+    ],
+    "en": [
+     "Example Ltd.",
+     "Musterstadt, Germany",
+     "Working Student, Quality Assurance",
+     "01/2026 -- present"
+    ]
+   },
+   "gruppen": [
+    [
+     {
+      "tags": [
+       "neutral",
+       "qa"
+      ],
+      "de": "Planung und Durchführung von Softwaretests über Jira",
+      "en": "Planning and executing software tests via Jira"
+     },
+     {
+      "tags": [
+       "automatisierung"
+      ],
+      "de": "Wiederkehrende Testabläufe dokumentiert und vereinfacht",
+      "en": "Documented and simplified recurring test procedures"
+     }
+    ],
+    [
+     {
+      "tags": [
+       "neutral",
+       "daten"
+      ],
+      "de": "Soll-Ist-Vergleiche von Daten in Excel, 25 % schneller als im Vorjahr",
+      "en": "Target/actual data comparisons in Excel, 25 % faster than the year before"
+     }
+    ]
+   ]
+  }
+ ],
+ "projekte": [
+  {
+   "id": "p_api",
+   "tags": [
+    "entwicklung",
+    "backend"
+   ],
+   "pflicht": false,
+   "kopf": {
+    "de": [
+     "REST-API (Python)",
+     "Softwareentwicklung, Zweierteam"
+    ],
+    "en": [
+     "REST API (Python)",
+     "Software Development, team of two"
+    ]
+   },
+   "gruppen": [
+    [
+     {
+      "tags": [
+       "neutral",
+       "entwicklung"
+      ],
+      "de": "REST-API mit FastAPI und PostgreSQL, CI über GitHub Actions",
+      "en": "REST API with FastAPI and PostgreSQL, CI via GitHub Actions"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "p_auto",
+   "tags": [
+    "automatisierung",
+    "prozess"
+   ],
+   "pflicht": false,
+   "kopf": {
+    "de": [
+     "Rechnungsautomatisierung",
+     "Digitalisierung, Viererteam"
+    ],
+    "en": [
+     "Invoice Automation",
+     "Digitalization, team of four"
+    ]
+   },
+   "gruppen": [
+    [
+     {
+      "tags": [
+       "neutral",
+       "prozess"
+      ],
+      "de": "Automatisierter Rechnungsprozess mit BPMN/DMN und n8n",
+      "en": "Automated invoice process with BPMN/DMN and n8n"
+     }
+    ]
+   ]
+  }
+ ],
+ "skills": [
+  {
+   "id": "s_prog",
+   "tags": [
+    "entwicklung"
+   ],
+   "de": "Programmierung (Projekterfahrung): Python, SQL, Java",
+   "en": "Programming (project experience): Python, SQL, Java"
+  },
+  {
+   "id": "s_auto",
+   "tags": [
+    "automatisierung",
+    "prozess"
+   ],
+   "de": "Prozesse & Automatisierung (Projekterfahrung): n8n, Camunda",
+   "en": "Process & Automation (project experience): n8n, Camunda"
+  }
+ ],
+ "sprachen": {
+  "de": "Sprachen: Deutsch (Muttersprache), Englisch (fließend)",
+  "en": "Languages: German (native), English (fluent)"
+ }
+}
